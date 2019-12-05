@@ -1,9 +1,10 @@
-﻿namespace EquipmentManagement.Domain
+﻿using System;
+
+namespace EquipmentManagement.Domain
 {
     public enum StateType
     {
         Fixed,
-        Active,
         Broken
     }
 
@@ -12,9 +13,13 @@
         public long Id { get; private set; }
         public StateType TypeOfState { get; private set; }
 
-        public EquipmentState(StateType st)
+        public DateTime Date { get; private set; }
+        public EquipmentState(StateType stateType, DateTime date)
         {
-            this.TypeOfState = st;
+            this.TypeOfState = stateType;
+            if (date == DateTime.MinValue)
+                throw new InvalidStateDateException();
+            this.Date = date;
         }
     }
 }

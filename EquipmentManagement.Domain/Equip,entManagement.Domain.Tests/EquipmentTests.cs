@@ -30,7 +30,7 @@ namespace EquipmentManagement.Domain.Tests
             Equipment eq = new Domain.Equipment();
             int stateCounter = eq.States.Count;
             UserAccount user = new UserAccount();
-            EquipmentState state = new EquipmentState(StateType.Active);
+            EquipmentState state = new EquipmentState(StateType.Broken, DateTime.Now);
             eq.ChangeState(user, state);
             Assert.AreEqual(eq.LastState, state);
             Assert.AreEqual(eq.States.Count, stateCounter + 1);
@@ -42,11 +42,22 @@ namespace EquipmentManagement.Domain.Tests
         {
             Equipment eq = new Domain.Equipment();
             var stateType = StateType.Fixed;
-            EquipmentState state1 = new EquipmentState(stateType);
+            EquipmentState state1 = new EquipmentState(stateType, DateTime.Now);
             UserAccount user = new UserAccount();
             eq.ChangeState(user, state1);
-            EquipmentState state2 = new EquipmentState(stateType);
+            EquipmentState state2 = new EquipmentState(stateType, DateTime.Now);
             eq.ChangeState(user, state2);            
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidStateDateException))]
+        public void ChangeState_Of_Equipment_ShouldThrowException_WhenStateDateIsInvalid()
+        {
+            Equipment eq = new Domain.Equipment();
+            var stateType = StateType.Fixed;
+            EquipmentState state1 = new EquipmentState(stateType, DateTime.MinValue);
+            UserAccount user = new UserAccount();
+            eq.ChangeState(user, state1);
         }
     }
 }
