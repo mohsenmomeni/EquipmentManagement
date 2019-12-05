@@ -22,10 +22,8 @@ namespace EquipmentManagement.Domain
             this.States = new List<EquipmentState>();
         }
 
-        public void ChangeState(UserAccount userx, EquipmentState state)
+        public void ChangeState(EquipmentState state)
         {
-            if (userx == null)
-                throw new InvalidUserAccountException();            
             ValidateState(state);
             this.States.Add(state);
         }
@@ -34,9 +32,7 @@ namespace EquipmentManagement.Domain
         {
             if (state == null)
                 throw new InvalidEquipmentStateException();
-            if (this.LastState == null)
-                return;
-            if (this.LastState.TypeOfState == state.TypeOfState)
+            if (LastState?.TypeOfState == state.TypeOfState)
                 throw new InvalidEquipmentStateException();
         }
     }

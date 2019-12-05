@@ -40,12 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangeStateRuleApplier.cs" />
     <Compile Include="Equipment.cs" />
     <Compile Include="EquipmentState.cs" />
     <Compile Include="Exceptions\InvalidUserException.cs" />
     <Compile Include="Exceptions\InvalidEquipmentStateException.cs" />
     <Compile Include="Exceptions\InvalidStateDateException.cs" />
+    <Compile Include="Exceptions\UserPermissionException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rules\IChangeStateRule.cs" />
+    <Compile Include="Rules\OperatorIsNotEligibleToRegisterFixed.cs" />
+    <Compile Include="Rules\RepairmanIsNotEligibleToRegisterBroken.cs" />
     <Compile Include="UserAccount.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
