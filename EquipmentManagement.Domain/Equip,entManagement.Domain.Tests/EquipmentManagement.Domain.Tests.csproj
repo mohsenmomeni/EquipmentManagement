@@ -7,8 +7,8 @@
     <ProjectGuid>{07B7D31D-D6D1-4108-83C9-3E4E38B22912}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Equip_entManagement.Domain.Tests</RootNamespace>
-    <AssemblyName>Equip,entManagement.Domain.Tests</AssemblyName>
+    <RootNamespace>EquipmentManagement.Domain.Tests</RootNamespace>
+    <AssemblyName>EquipmentManagement.Domain.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -53,6 +53,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EquipmentManagement.Domain\EquipmentManagement.Domain.csproj">
+      <Project>{46ff7131-efa8-41c9-a2c8-fabcc094abe1}</Project>
+      <Name>EquipmentManagement.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27428.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EquipmentManagement.Domain", "EquipmentManagement.Domain\EquipmentManagement.Domain.csproj", "{46FF7131-EFA8-41C9-A2C8-FABCC094ABE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Equip,entManagement.Domain.Tests", "Equip,entManagement.Domain.Tests\Equip,entManagement.Domain.Tests.csproj", "{07B7D31D-D6D1-4108-83C9-3E4E38B22912}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EquipmentManagement.Domain.Tests", "Equip,entManagement.Domain.Tests\EquipmentManagement.Domain.Tests.csproj", "{07B7D31D-D6D1-4108-83C9-3E4E38B22912}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
