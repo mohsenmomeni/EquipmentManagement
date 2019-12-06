@@ -51,6 +51,7 @@
     <Compile Include="Rules\IChangeStateRule.cs" />
     <Compile Include="Rules\OperatorIsNotEligibleToRegisterFixed.cs" />
     <Compile Include="Rules\RepairmanIsNotEligibleToRegisterBroken.cs" />
+    <Compile Include="StateType.cs" />
     <Compile Include="UserAccount.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

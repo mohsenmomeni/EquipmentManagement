@@ -3,8 +3,10 @@
     public enum UserType
     {
         Operator,
-        Repairman
+        Repairman,
+        System
     }
+
     public class UserAccount
     {
         public UserType UserType { get; set; }

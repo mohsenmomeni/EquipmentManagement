@@ -13,18 +13,41 @@ namespace EquipmentManagement.Domain
         {
             get
             {
-                return this.States.OrderByDescending(o => o.Id).FirstOrDefault();
+                return this.States.OrderByDescending(o => o.Order).FirstOrDefault();
             }
+        }
+
+        public TimeSpan Readyness => CalculateReadyness();
+
+        private TimeSpan CalculateReadyness()
+        {
+            TimeSpan timeSpan = new TimeSpan(0,0,0,0);
+            if (this.States.All(o => o.TypeOfState != StateType.Fixed))
+                return timeSpan;
+            foreach (var equipmentState in States)
+            {
+                if (equipmentState.TypeOfState == StateType.Fixed)
+                {
+                    
+                }
+            }
+            return DateTime.Now.Subtract(LastState.Date);
         }
 
         public Equipment()
         {
-            this.States = new List<EquipmentState>();
+            var initialState = new EquipmentState(StateType.Initial, DateTime.Now, new UserAccount(UserType.System));
+            initialState.SetOrder(1);
+            this.States = new List<EquipmentState>
+            {
+                initialState
+            };
         }
 
         public void ChangeState(EquipmentState state)
         {
             ValidateState(state);
+            state.SetOrder(this.LastState.Order + 1);
             this.States.Add(state);
         }
 

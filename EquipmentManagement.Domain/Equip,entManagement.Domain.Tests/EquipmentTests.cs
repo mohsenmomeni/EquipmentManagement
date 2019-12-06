@@ -1,6 +1,7 @@
 ﻿using EquipmentManagement.Domain.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Threading;
 
 namespace EquipmentManagement.Domain.Tests
 {
@@ -14,13 +15,6 @@ namespace EquipmentManagement.Domain.Tests
             new Equipment().ChangeState(null);
         }
         
-        [TestMethod]
-        [ExpectedException(typeof(InvalidUserAccountException))]
-        public void ChangeState_Of_Equipment_ShouldThrowException_WhenStateDoesNotContainsValidUserAccount()
-        {
-            new Equipment().ChangeState(new EquipmentState(StateType.Broken, DateTime.Now, null));
-        }
-
         [TestMethod]
         public void ChangeState_Of_Equipment_ShouldChangeEquipmentState_WhenStateIsValid()
         {
@@ -41,30 +35,21 @@ namespace EquipmentManagement.Domain.Tests
             eq.ChangeState(new EquipmentState(StateType.Broken, DateTime.Now, new UserAccount(UserType.Operator)));
             eq.ChangeState(new EquipmentState(StateType.Broken, DateTime.Now, new UserAccount(UserType.Operator)));
         }
-
+        
         [TestMethod]
-        [ExpectedException(typeof(InvalidStateDateException))]
-        public void ChangeState_Of_Equipment_ShouldThrowException_WhenStateDateIsInvalid()
+        public void Readyness_Of_Equipment_ShouldBeZero_WhenItsStateHasNotChanged()
         {
-            new Equipment().ChangeState(new EquipmentState(StateType.Fixed, DateTime.MinValue, new UserAccount(UserType.Operator)));
+            var equipment = new Equipment();
+            Assert.AreEqual(equipment.Readyness, new TimeSpan(0,0,0,0));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(UserPermissionException))]
-        public void ChangeState_Of_Equipment_ShouldThrowException_WhenOperatorTryToChangeStateToFixed()
+        public void Readyness_Of_Equipment_ShouldNotBeZero_WhenItsStatesContainsFixed()
         {
-            new Equipment().ChangeState(
-                new EquipmentState(StateType.Fixed, DateTime.Now,
-                    new UserAccount(UserType.Operator)));
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(UserPermissionException))]
-        public void ChangeState_Of_Equipment_ShouldThrowException_WhenRepairmanTryToChangeStateToBroken()
-        {
-            new Equipment().ChangeState(
-                new EquipmentState(StateType.Broken, DateTime.Now,
-                    new UserAccount( UserType.Repairman )));
+            var equipment = new Equipment();
+            equipment.ChangeState(new EquipmentState(StateType.Fixed, DateTime.Now, new UserAccount(UserType.Repairman)));
+            Thread.Sleep(1000);
+            Assert.IsTrue(equipment.Readyness.TotalMilliseconds > 500);
         }
     }
 }
